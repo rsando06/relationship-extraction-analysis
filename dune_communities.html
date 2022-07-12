@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 700px;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"betweenness_centrality": 0.046823674409881305, "closeness_centrality": 0.5172413793103449, "degree_centrality": 0.3, "font": {"color": "white"}, "group": 0, "id": "Duncan", "label": "Duncan", "shape": "dot", "size": 9}, {"betweenness_centrality": 0.0015673981191222572, "closeness_centrality": 0.4225352112676056, "degree_centrality": 0.13333333333333333, "font": {"color": "white"}, "group": 1, "id": "Jessica", "label": "Jessica", "shape": "dot", "size": 4}, {"betweenness_centrality": 0.06388089560503353, "closeness_centrality": 0.5357142857142857, "degree_centrality": 0.3333333333333333, "font": {"color": "white"}, "group": 1, "id": "Chani", "label": "Chani", "shape": "dot", "size": 10}, {"betweenness_centrality": 0.022784877957291748, "closeness_centrality": 0.4838709677419355, "degree_centrality": 0.26666666666666666, "font": {"color": "white"}, "group": 0, "id": "Scytale", "label": "Scytale", "shape": "dot", "size": 8}, {"betweenness_centrality": 0.0678927203065134, "closeness_centrality": 0.43478260869565216, "degree_centrality": 0.16666666666666666, "font": {"color": "white"}, "group": 0, "id": "Farok", "label": "Farok", "shape": "dot", "size": 5}, {"betweenness_centrality": 0.0152629745733194, "closeness_centrality": 0.5, "degree_centrality": 0.26666666666666666, "font": {"color": "white"}, "group": 0, "id": "Hayt", "label": "Hayt", "shape": "dot", "size": 8}, {"betweenness_centrality": 0.3533556609418679, "closeness_centrality": 0.625, "degree_centrality": 0.5333333333333333, "font": {"color": "white"}, "group": 3, "id": "Stilgar", "label": "Stilgar", "shape": "dot", "size": 16}, {"betweenness_centrality": 0.28141440934544387, "closeness_centrality": 0.5882352941176471, "degree_centrality": 0.4666666666666667, "font": {"color": "white"}, "group": 1, "id": "Alia", "label": "Alia", "shape": "dot", "size": 14}, {"betweenness_centrality": 0.19455697559145832, "closeness_centrality": 0.5454545454545454, "degree_centrality": 0.36666666666666664, "font": {"color": "white"}, "group": 3, "id": "Bijaz", "label": "Bijaz", "shape": "dot", "size": 11}, {"betweenness_centrality": 0.009294090328573085, "closeness_centrality": 0.40540540540540543, "degree_centrality": 0.16666666666666666, "font": {"color": "white"}, "group": 3, "id": "Lichna", "label": "Lichna", "shape": "dot", "size": 5}, {"betweenness_centrality": 0.07056194125159643, "closeness_centrality": 0.46153846153846156, "degree_centrality": 0.2, "font": {"color": "white"}, "group": 1, "id": "Harah", "label": "Harah", "shape": "dot", "size": 6}, {"betweenness_centrality": 0.004099616858237547, "closeness_centrality": 0.46153846153846156, "degree_centrality": 0.2, "font": {"color": "white"}, "group": 1, "id": "Irulan", "label": "Irulan", "shape": "dot", "size": 6}, {"betweenness_centrality": 0.004791951343675482, "closeness_centrality": 0.46153846153846156, "degree_centrality": 0.2, "font": {"color": "white"}, "group": 0, "id": "Edric", "label": "Edric", "shape": "dot", "size": 6}, {"betweenness_centrality": 0.007845028534683707, "closeness_centrality": 0.4166666666666667, "degree_centrality": 0.16666666666666666, "font": {"color": "white"}, "group": 0, "id": "Gaius", "label": "Gaius", "shape": "dot", "size": 5}, {"betweenness_centrality": 0.12873563218390804, "closeness_centrality": 0.39473684210526316, "degree_centrality": 0.06666666666666667, "font": {"color": "white"}, "group": 4, "id": "Rajifiri", "label": "Rajifiri", "shape": "dot", "size": 2}, {"betweenness_centrality": 0.0379549696791076, "closeness_centrality": 0.5084745762711864, "degree_centrality": 0.23333333333333334, "font": {"color": "white"}, "group": 3, "id": "Otheym", "label": "Otheym", "shape": "dot", "size": 7}, {"betweenness_centrality": 0.0, "closeness_centrality": 0.38961038961038963, "degree_centrality": 0.06666666666666667, "font": {"color": "white"}, "group": 1, "id": "Ghanima", "label": "Ghanima", "shape": "dot", "size": 2}, {"betweenness_centrality": 0.04659003831417624, "closeness_centrality": 0.45454545454545453, "degree_centrality": 0.16666666666666666, "font": {"color": "white"}, "group": 3, "id": "Bannerjee", "label": "Bannerjee", "shape": "dot", "size": 5}, {"betweenness_centrality": 0.0, "closeness_centrality": 0.3191489361702128, "degree_centrality": 0.03333333333333333, "font": {"color": "white"}, "group": 1, "id": "Leto", "label": "Leto", "shape": "dot", "size": 1}, {"betweenness_centrality": 0.08272030651340995, "closeness_centrality": 0.4225352112676056, "degree_centrality": 0.1, "font": {"color": "white"}, "group": 2, "id": "Korba", "label": "Korba", "shape": "dot", "size": 3}, {"betweenness_centrality": 0.003238485652278756, "closeness_centrality": 0.43478260869565216, "degree_centrality": 0.13333333333333333, "font": {"color": "white"}, "group": 3, "id": "Dhuri", "label": "Dhuri", "shape": "dot", "size": 4}, {"betweenness_centrality": 0.0, "closeness_centrality": 0.38961038961038963, "degree_centrality": 0.03333333333333333, "font": {"color": "white"}, "group": 3, "id": "Tecrube", "label": "Tecrube", "shape": "dot", "size": 1}, {"betweenness_centrality": 0.008122605363984674, "closeness_centrality": 0.4, "degree_centrality": 0.06666666666666667, "font": {"color": "white"}, "group": 3, "id": "Tibana", "label": "Tibana", "shape": "dot", "size": 2}, {"betweenness_centrality": 0.0035249042145593873, "closeness_centrality": 0.36585365853658536, "degree_centrality": 0.06666666666666667, "font": {"color": "white"}, "group": 3, "id": "Dalamak", "label": "Dalamak", "shape": "dot", "size": 2}, {"betweenness_centrality": 0.05517241379310345, "closeness_centrality": 0.375, "degree_centrality": 0.06666666666666667, "font": {"color": "white"}, "group": 2, "id": "Bikouros", "label": "Bikouros", "shape": "dot", "size": 2}, {"betweenness_centrality": 0.0, "closeness_centrality": 0.30612244897959184, "degree_centrality": 0.03333333333333333, "font": {"color": "white"}, "group": 0, "id": "Zaal", "label": "Zaal", "shape": "dot", "size": 1}, {"betweenness_centrality": 0.012720306513409961, "closeness_centrality": 0.3125, "degree_centrality": 0.06666666666666667, "font": {"color": "white"}, "group": 2, "id": "Djedida", "label": "Djedida", "shape": "dot", "size": 2}, {"betweenness_centrality": 0.0022988505747126436, "closeness_centrality": 0.3333333333333333, "degree_centrality": 0.06666666666666667, "font": {"color": "white"}, "group": 2, "id": "Abumojandis", "label": "Abumojandis", "shape": "dot", "size": 2}, {"betweenness_centrality": 0.06666666666666667, "closeness_centrality": 0.2912621359223301, "degree_centrality": 0.06666666666666667, "font": {"color": "white"}, "group": 4, "id": "Tasmin", "label": "Tasmin", "shape": "dot", "size": 2}, {"betweenness_centrality": 0.0, "closeness_centrality": 0.22727272727272727, "degree_centrality": 0.03333333333333333, "font": {"color": "white"}, "group": 4, "id": "Umbu", "label": "Umbu", "shape": "dot", "size": 1}, {"betweenness_centrality": 0.00582375478927203, "closeness_centrality": 0.28846153846153844, "degree_centrality": 0.06666666666666667, "font": {"color": "white"}, "group": 2, "id": "Cahueit", "label": "Cahueit", "shape": "dot", "size": 2}]);
+        edges = new vis.DataSet([{"from": "Duncan", "label": 1, "to": "Jessica", "value": 6, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Chani", "value": 8, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Scytale", "value": 14, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Farok", "value": 3, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Hayt", "value": 54, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Stilgar", "value": 10, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Alia", "value": 2, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Bijaz", "value": 36, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Lichna", "value": 1, "weight": 1}, {"from": "Jessica", "label": 1, "to": "Alia", "value": 7, "weight": 1}, {"from": "Jessica", "label": 1, "to": "Chani", "value": 9, "weight": 1}, {"from": "Jessica", "label": 1, "to": "Harah", "value": 2, "weight": 1}, {"from": "Alia", "label": 1, "to": "Stilgar", "value": 65, "weight": 1}, {"from": "Alia", "label": 1, "to": "Irulan", "value": 12, "weight": 1}, {"from": "Alia", "label": 1, "to": "Hayt", "value": 19, "weight": 1}, {"from": "Alia", "label": 1, "to": "Edric", "value": 5, "weight": 1}, {"from": "Alia", "label": 1, "to": "Chani", "value": 5, "weight": 1}, {"from": "Alia", "label": 1, "to": "Gaius", "value": 3, "weight": 1}, {"from": "Alia", "label": 1, "to": "Scytale", "value": 3, "weight": 1}, {"from": "Alia", "label": 1, "to": "Rajifiri", "value": 5, "weight": 1}, {"from": "Alia", "label": 1, "to": "Otheym", "value": 6, "weight": 1}, {"from": "Alia", "label": 1, "to": "Bijaz", "value": 11, "weight": 1}, {"from": "Alia", "label": 1, "to": "Harah", "value": 8, "weight": 1}, {"from": "Alia", "label": 1, "to": "Ghanima", "value": 5, "weight": 1}, {"from": "Chani", "label": 1, "to": "Irulan", "value": 65, "weight": 1}, {"from": "Chani", "label": 1, "to": "Stilgar", "value": 25, "weight": 1}, {"from": "Chani", "label": 1, "to": "Hayt", "value": 2, "weight": 1}, {"from": "Chani", "label": 1, "to": "Bannerjee", "value": 10, "weight": 1}, {"from": "Chani", "label": 1, "to": "Harah", "value": 12, "weight": 1}, {"from": "Chani", "label": 1, "to": "Ghanima", "value": 5, "weight": 1}, {"from": "Chani", "label": 1, "to": "Bijaz", "value": 1, "weight": 1}, {"from": "Gaius", "label": 1, "to": "Scytale", "value": 5, "weight": 1}, {"from": "Gaius", "label": 1, "to": "Hayt", "value": 2, "weight": 1}, {"from": "Gaius", "label": 1, "to": "Edric", "value": 6, "weight": 1}, {"from": "Gaius", "label": 1, "to": "Lichna", "value": 6, "weight": 1}, {"from": "Scytale", "label": 1, "to": "Edric", "value": 27, "weight": 1}, {"from": "Scytale", "label": 1, "to": "Irulan", "value": 14, "weight": 1}, {"from": "Scytale", "label": 1, "to": "Hayt", "value": 6, "weight": 1}, {"from": "Scytale", "label": 1, "to": "Farok", "value": 44, "weight": 1}, {"from": "Scytale", "label": 1, "to": "Stilgar", "value": 4, "weight": 1}, {"from": "Edric", "label": 1, "to": "Irulan", "value": 1, "weight": 1}, {"from": "Edric", "label": 1, "to": "Hayt", "value": 10, "weight": 1}, {"from": "Edric", "label": 1, "to": "Stilgar", "value": 18, "weight": 1}, {"from": "Irulan", "label": 1, "to": "Harah", "value": 15, "weight": 1}, {"from": "Irulan", "label": 1, "to": "Stilgar", "value": 15, "weight": 1}, {"from": "Hayt", "label": 1, "to": "Stilgar", "value": 12, "weight": 1}, {"from": "Hayt", "label": 1, "to": "Bijaz", "value": 126, "weight": 1}, {"from": "Harah", "label": 1, "to": "Stilgar", "value": 22, "weight": 1}, {"from": "Harah", "label": 1, "to": "Leto", "value": 6, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Farok", "value": 4, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Korba", "value": 3, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Bannerjee", "value": 12, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Dhuri", "value": 1, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Otheym", "value": 11, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Bijaz", "value": 20, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Tecrube", "value": 1, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Tibana", "value": 3, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Otheym", "value": 42, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Dhuri", "value": 45, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Lichna", "value": 2, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Dalamak", "value": 4, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Bikouros", "value": 3, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Bannerjee", "value": 2, "weight": 1}, {"from": "Otheym", "label": 1, "to": "Farok", "value": 6, "weight": 1}, {"from": "Otheym", "label": 1, "to": "Bannerjee", "value": 14, "weight": 1}, {"from": "Otheym", "label": 1, "to": "Dhuri", "value": 72, "weight": 1}, {"from": "Otheym", "label": 1, "to": "Lichna", "value": 6, "weight": 1}, {"from": "Farok", "label": 1, "to": "Zaal", "value": 7, "weight": 1}, {"from": "Korba", "label": 1, "to": "Djedida", "value": 6, "weight": 1}, {"from": "Korba", "label": 1, "to": "Abumojandis", "value": 5, "weight": 1}, {"from": "Bannerjee", "label": 1, "to": "Abumojandis", "value": 6, "weight": 1}, {"from": "Dhuri", "label": 1, "to": "Lichna", "value": 11, "weight": 1}, {"from": "Rajifiri", "label": 1, "to": "Tasmin", "value": 6, "weight": 1}, {"from": "Tasmin", "label": 1, "to": "Umbu", "value": 6, "weight": 1}, {"from": "Tibana", "label": 1, "to": "Dalamak", "value": 6, "weight": 1}, {"from": "Bikouros", "label": 1, "to": "Cahueit", "value": 6, "weight": 1}, {"from": "Cahueit", "label": 1, "to": "Djedida", "value": 5, "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

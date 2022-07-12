@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 700px;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Duncan", "label": "Duncan", "shape": "dot", "size": 9}, {"font": {"color": "white"}, "id": "Jessica", "label": "Jessica", "shape": "dot", "size": 4}, {"font": {"color": "white"}, "id": "Chani", "label": "Chani", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Scytale", "label": "Scytale", "shape": "dot", "size": 8}, {"font": {"color": "white"}, "id": "Farok", "label": "Farok", "shape": "dot", "size": 5}, {"font": {"color": "white"}, "id": "Hayt", "label": "Hayt", "shape": "dot", "size": 8}, {"font": {"color": "white"}, "id": "Stilgar", "label": "Stilgar", "shape": "dot", "size": 16}, {"font": {"color": "white"}, "id": "Alia", "label": "Alia", "shape": "dot", "size": 14}, {"font": {"color": "white"}, "id": "Bijaz", "label": "Bijaz", "shape": "dot", "size": 11}, {"font": {"color": "white"}, "id": "Lichna", "label": "Lichna", "shape": "dot", "size": 5}, {"font": {"color": "white"}, "id": "Harah", "label": "Harah", "shape": "dot", "size": 6}, {"font": {"color": "white"}, "id": "Irulan", "label": "Irulan", "shape": "dot", "size": 6}, {"font": {"color": "white"}, "id": "Edric", "label": "Edric", "shape": "dot", "size": 6}, {"font": {"color": "white"}, "id": "Gaius", "label": "Gaius", "shape": "dot", "size": 5}, {"font": {"color": "white"}, "id": "Rajifiri", "label": "Rajifiri", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Otheym", "label": "Otheym", "shape": "dot", "size": 7}, {"font": {"color": "white"}, "id": "Ghanima", "label": "Ghanima", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Bannerjee", "label": "Bannerjee", "shape": "dot", "size": 5}, {"font": {"color": "white"}, "id": "Leto", "label": "Leto", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "Korba", "label": "Korba", "shape": "dot", "size": 3}, {"font": {"color": "white"}, "id": "Dhuri", "label": "Dhuri", "shape": "dot", "size": 4}, {"font": {"color": "white"}, "id": "Tecrube", "label": "Tecrube", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "Tibana", "label": "Tibana", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Dalamak", "label": "Dalamak", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Bikouros", "label": "Bikouros", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Zaal", "label": "Zaal", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "Djedida", "label": "Djedida", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Abumojandis", "label": "Abumojandis", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Tasmin", "label": "Tasmin", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Umbu", "label": "Umbu", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "Cahueit", "label": "Cahueit", "shape": "dot", "size": 2}]);
+        edges = new vis.DataSet([{"from": "Duncan", "label": 1, "to": "Jessica", "value": 6, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Chani", "value": 8, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Scytale", "value": 14, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Farok", "value": 3, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Hayt", "value": 54, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Stilgar", "value": 10, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Alia", "value": 2, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Bijaz", "value": 36, "weight": 1}, {"from": "Duncan", "label": 1, "to": "Lichna", "value": 1, "weight": 1}, {"from": "Jessica", "label": 1, "to": "Alia", "value": 7, "weight": 1}, {"from": "Jessica", "label": 1, "to": "Chani", "value": 9, "weight": 1}, {"from": "Jessica", "label": 1, "to": "Harah", "value": 2, "weight": 1}, {"from": "Alia", "label": 1, "to": "Stilgar", "value": 65, "weight": 1}, {"from": "Alia", "label": 1, "to": "Irulan", "value": 12, "weight": 1}, {"from": "Alia", "label": 1, "to": "Hayt", "value": 19, "weight": 1}, {"from": "Alia", "label": 1, "to": "Edric", "value": 5, "weight": 1}, {"from": "Alia", "label": 1, "to": "Chani", "value": 5, "weight": 1}, {"from": "Alia", "label": 1, "to": "Gaius", "value": 3, "weight": 1}, {"from": "Alia", "label": 1, "to": "Scytale", "value": 3, "weight": 1}, {"from": "Alia", "label": 1, "to": "Rajifiri", "value": 5, "weight": 1}, {"from": "Alia", "label": 1, "to": "Otheym", "value": 6, "weight": 1}, {"from": "Alia", "label": 1, "to": "Bijaz", "value": 11, "weight": 1}, {"from": "Alia", "label": 1, "to": "Harah", "value": 8, "weight": 1}, {"from": "Alia", "label": 1, "to": "Ghanima", "value": 5, "weight": 1}, {"from": "Chani", "label": 1, "to": "Irulan", "value": 65, "weight": 1}, {"from": "Chani", "label": 1, "to": "Stilgar", "value": 25, "weight": 1}, {"from": "Chani", "label": 1, "to": "Hayt", "value": 2, "weight": 1}, {"from": "Chani", "label": 1, "to": "Bannerjee", "value": 10, "weight": 1}, {"from": "Chani", "label": 1, "to": "Harah", "value": 12, "weight": 1}, {"from": "Chani", "label": 1, "to": "Ghanima", "value": 5, "weight": 1}, {"from": "Chani", "label": 1, "to": "Bijaz", "value": 1, "weight": 1}, {"from": "Gaius", "label": 1, "to": "Scytale", "value": 5, "weight": 1}, {"from": "Gaius", "label": 1, "to": "Hayt", "value": 2, "weight": 1}, {"from": "Gaius", "label": 1, "to": "Edric", "value": 6, "weight": 1}, {"from": "Gaius", "label": 1, "to": "Lichna", "value": 6, "weight": 1}, {"from": "Scytale", "label": 1, "to": "Edric", "value": 27, "weight": 1}, {"from": "Scytale", "label": 1, "to": "Irulan", "value": 14, "weight": 1}, {"from": "Scytale", "label": 1, "to": "Hayt", "value": 6, "weight": 1}, {"from": "Scytale", "label": 1, "to": "Farok", "value": 44, "weight": 1}, {"from": "Scytale", "label": 1, "to": "Stilgar", "value": 4, "weight": 1}, {"from": "Edric", "label": 1, "to": "Irulan", "value": 1, "weight": 1}, {"from": "Edric", "label": 1, "to": "Hayt", "value": 10, "weight": 1}, {"from": "Edric", "label": 1, "to": "Stilgar", "value": 18, "weight": 1}, {"from": "Irulan", "label": 1, "to": "Harah", "value": 15, "weight": 1}, {"from": "Irulan", "label": 1, "to": "Stilgar", "value": 15, "weight": 1}, {"from": "Hayt", "label": 1, "to": "Stilgar", "value": 12, "weight": 1}, {"from": "Hayt", "label": 1, "to": "Bijaz", "value": 126, "weight": 1}, {"from": "Harah", "label": 1, "to": "Stilgar", "value": 22, "weight": 1}, {"from": "Harah", "label": 1, "to": "Leto", "value": 6, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Farok", "value": 4, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Korba", "value": 3, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Bannerjee", "value": 12, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Dhuri", "value": 1, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Otheym", "value": 11, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Bijaz", "value": 20, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Tecrube", "value": 1, "weight": 1}, {"from": "Stilgar", "label": 1, "to": "Tibana", "value": 3, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Otheym", "value": 42, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Dhuri", "value": 45, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Lichna", "value": 2, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Dalamak", "value": 4, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Bikouros", "value": 3, "weight": 1}, {"from": "Bijaz", "label": 1, "to": "Bannerjee", "value": 2, "weight": 1}, {"from": "Otheym", "label": 1, "to": "Farok", "value": 6, "weight": 1}, {"from": "Otheym", "label": 1, "to": "Bannerjee", "value": 14, "weight": 1}, {"from": "Otheym", "label": 1, "to": "Dhuri", "value": 72, "weight": 1}, {"from": "Otheym", "label": 1, "to": "Lichna", "value": 6, "weight": 1}, {"from": "Farok", "label": 1, "to": "Zaal", "value": 7, "weight": 1}, {"from": "Korba", "label": 1, "to": "Djedida", "value": 6, "weight": 1}, {"from": "Korba", "label": 1, "to": "Abumojandis", "value": 5, "weight": 1}, {"from": "Bannerjee", "label": 1, "to": "Abumojandis", "value": 6, "weight": 1}, {"from": "Dhuri", "label": 1, "to": "Lichna", "value": 11, "weight": 1}, {"from": "Rajifiri", "label": 1, "to": "Tasmin", "value": 6, "weight": 1}, {"from": "Tasmin", "label": 1, "to": "Umbu", "value": 6, "weight": 1}, {"from": "Tibana", "label": 1, "to": "Dalamak", "value": 6, "weight": 1}, {"from": "Bikouros", "label": 1, "to": "Cahueit", "value": 6, "weight": 1}, {"from": "Cahueit", "label": 1, "to": "Djedida", "value": 5, "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
